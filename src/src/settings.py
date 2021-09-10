@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'drf_yasg',
+
+    # Custom Apps
+    'authentication.apps.AuthenticationConfig',
+    'task.apps.TaskConfig',
 
 ]
 
