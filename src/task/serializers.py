@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Collection, Task, Collaborator
+from .models import Collection, Task, Collaborator, Tag
 from rest_framework import serializers
 
 
@@ -11,6 +11,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    # id = serializers.IntegerField(read_only=True,)
+    # name = serializers.CharField(required=True, max_length=255, min_length=2)
+    # detail = serializers.CharField(max_length=255, min_length=10)
+    # isChecklist = serializers.BooleanField(default=False)
+    # done = serializers.BooleanField(default=False)
+    # priority = serializers.IntegerField(min_value=1, max_value=5, default=1)
+    # collection = serializers.PrimaryKeyRelatedField(read_only=False, many=False)
+
     class Meta:
         model = Task
         fields = ('id', 'name', 'detail', 'isChecklist', 'done', 'priority')
@@ -43,5 +51,19 @@ class CollectionSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description', 'color', 'starred', 'tasks', 'collaborators', 'user')
 
 
+class CollectionSerializerShort(serializers.ModelSerializer):
+    class Meta:
+        model = Collection
+        fields = ('id', 'name', 'description', 'color', 'starred', 'updated')
 
+
+class TagSerializer(serializers.ModelSerializer):
+    tasks = TaskSerializer(
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'name', 'tasks')
 

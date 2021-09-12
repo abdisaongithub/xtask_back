@@ -50,7 +50,7 @@ class Task(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, null=False)
-    task = models.ManyToManyField(Task, related_name='tags')
+    tasks = models.ManyToManyField(Task, related_name='tags')
 
     def __str__(self):
         return self.name
