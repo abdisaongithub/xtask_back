@@ -4,9 +4,11 @@ from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
+    collections = serializers.PrimaryKeyRelatedField(many=True, queryset=Collection.objects.all())
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'collections')
         # exclude = ['password']
 
 
@@ -25,6 +27,8 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class CollaboratorSerializer(serializers.ModelSerializer):
+    # user = serializers.PrimaryKeyRelatedField(many=False,)
+
     class Meta:
         model = Collaborator
         fields = ('id', 'user', 'collection')

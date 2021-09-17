@@ -35,6 +35,10 @@ class CollectionCreateView(generics.CreateAPIView):
         serializer = CollectionSerializer(collection)
         return Response(serializer.data)
 
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
+    # TODO: Checkout this method
+
 
 class CollectionRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Collection.objects.all()
